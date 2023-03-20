@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct MovieDetailView: View {
-    
+    @Environment(\.dismiss) var dismiss
     let movie:Movie
     let headerHeight:CGFloat = 200
     
     var body: some View {
         ZStack {
+               
             VStack{
                 AsyncImage(url: movie.backdropURL) { image in
                     
@@ -21,23 +22,41 @@ struct MovieDetailView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(height:headerHeight)
+                        .clipShape(RoundedRectangle(cornerRadius:15))
                 } placeholder: {
                     ProgressView()
                 }
-                    .frame(height: 200)
+                    
             Spacer()
             }
-            
+            .ignoresSafeArea()
             ScrollView{
                 Spacer()
-                    .frame(height: 200)
+                    .frame(height: headerHeight)
                 Text(movie.title)
-
+                    .font(.title2)
+                    .fontWeight(.heavy)
+                Spacer()
+                //rating here
+                
                 Text(movie.overview)
             }
             
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .overlay(alignment:.topLeading) {
+            Button {
+                dismiss()
+            }label:{
+                Image(systemName: "chevron.left")
+                    .imageScale(.large)
+                    .fontWeight(.bold)
+            }
+            .padding(.leading)
+        }
+     
+        .toolbar(.hidden,for: .navigationBar)
+     
+
     }
 }
 
