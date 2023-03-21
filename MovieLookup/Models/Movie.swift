@@ -25,7 +25,7 @@ struct Movie:Identifiable,Codable {
     }
     
     var backdropURL:URL? {
-        let baseURL = URL(string: "https://image.tmdb.org/t/p/w300/")
+        let baseURL = URL(string: "https://image.tmdb.org/t/p/w500/")
         return baseURL?.appending(path: backDropPath ?? "")
     }
     
@@ -35,7 +35,7 @@ struct Movie:Identifiable,Codable {
     }
     
     var poster:URL? {
-        let baseURL = URL(string: "https://image.tmdb.org/t/p/w300/")
+        let baseURL = URL(string: "https://image.tmdb.org/t/p/w500/")
         return baseURL?.appending(path: posterPath ?? "")
     }
     
